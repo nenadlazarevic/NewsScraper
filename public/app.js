@@ -2,7 +2,10 @@ $.getJSON("/articles", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<div class='col-sm-10' style='margin-bottom:60px;'><div class='card'><div class='card-body'><a class='title-link' href='" + data[i].link +"'><h1>" + data[i].title + "</h1></a><hr><img src='"+ data[i].imageLink + "' class='rounded float-left m-4' alt='responsive image'width='280' height='250'><hr><h2 class='card-text'>" + data[i].summary + "</h2><button id='btn-save' data-id='" + data[i]._id + "' class='btn btn-outline-primary btn-sm'>Save Article</button></div></div></div>");
+      $("#articles").append("<div class='col-sm-10' style='margin-bottom:60px;'><div class='card'><div class='card-body'><a class='title-link' href='" + data[i].link +"'><h1>" + data[i].title + "</h1></a><hr><img src='"+ data[i].imageLink + "' class='rounded float-left m-4' alt='responsive image'width='280' height='250'><hr><h2 class='card-text'>" + data[i].summary + "</h2>"
+      +  "<button class='view-notes' type='button' data-target='#noteModal' data-toggle='modal' data-id='" + data[i]._id + "'>" + "View Notes" + "</button>" +
+        "<button class='save-article' type='submit' data-id='" + data[i]._id + "'>" + "Save Article" + "</button></div></div>"  + "<br>" + "<br>" + "<br>"
+        );
     }
   });
   
@@ -18,21 +21,38 @@ $.getJSON("/articles", function(data) {
       });
   });
   $(document).on("click", "#btn-save", function() {
-    $(this).addClass("disabled");
-    var thisId = $(this).attr("data-id");
-    console.log(thisId);
+  $(this).addClass("disabled");
+  var thisId = $(this).attr("data-id");
+  console.log(thisId);
+
+  $.ajax({
+    method: "PUT",
+    url: "/saved/" + thisId,
+   
+  })
   
-    $.ajax({
-      method: "PUT",
-      url: "/saved/" + thisId,
-     
-    })
-    
-    .done(function(data) {
-        console.log(data);
-    });
+  .done(function(data) {
+      console.log(data);
   });
-  
+});
+// when you click on view saved
+$("#view-saved").on("click", function() {
+ $.getJSON("/articles/" + thisId, function(data) {
+    // hide articles and show saved
+    $("#articles").hide();
+     $("#savedArticles").show();
+     $("#savedArticles").empty();
+   // For each one
+   for (var i = 0; i < data.length; i++) {
+     // Display the information on the page
+      $("#savedArticles").append("<div class='panel panel-primary'> <div class='panel-heading'><h3 data-id='" + data[i]._id + "'>" + data[i].title + "<br />" +  "</h3></div>" + "<div class='panel-body'><p>" + data[i].summary + "</p>" + "<br>" +
+     "<h5>" + "<a href='" + data[i].link + "'>" + "Article link" + '</a>' + "</h5>" +
+       "<button class='view-notes' type='button' data-target='#noteModal' data-toggle='modal' data-id='" + data[i]._id + "'>" + "View Notes" + "</button>" +
+       "<button class='delete-article' type='submit' data-id='" + data[i]._id + "'>" + "Delete Article" + "</button></div></div>"  + "<br>" + "<br>" + "<br>"
+     );
+   }
+ });
+});
   // Whenever someone clicks a p tag
 //   $(document).on("click", "p", function() {
 //     // Empty the notes from the note section

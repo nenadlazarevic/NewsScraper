@@ -32,7 +32,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/saved">Saved Articles</a>
+              <a id="view-saved" class="nav-link" href="/">Saved Articles</a>
             </li>
             <li class="nav-item">
               <a class="btn btn-danger scrape-new">SCRAPE NEW ARTICLES!</a>
@@ -50,10 +50,11 @@
         </div>
         <div class="caption">
           <h1>Mongo Scraper</h1>
-          <p>NPR news</p>
+          <h3 >NPR news</h3>
         </div>
       </div>
       <div class="container-fluid article-container" id="articles">
+            <div class="container-fluid article-container" id="savedArticles">
  
         <div class="alert alert-warning text-center">
           <h4>Uh Oh. Looks like we don't have any new articles.</h4>
@@ -64,13 +65,14 @@
           </div>
           <div class="card-body text-center">
             <h4>
-              <a class="scrape-new">Try Scraping New Articles</a>
+              <a href="/" class="scrape-new">Try Scraping New Articles</a>
             </h4>
             <h4>
               <a href="/saved">Go to Saved Articles</a>
             </h4>
           </div>
         </div>
+      </div>
       </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
