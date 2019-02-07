@@ -23,9 +23,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_769ptnmx:k2b8bphiso411el2eqdsrmhtc8@ds123645.mlab.com:23645/heroku_769ptnmx",;
 
-mongoose.connect(MONGODB_URI,{ useNewUrlParser: true });
+mongoose.connect(MONGODB_URI,);
 // mongoose.connect("mongodb://localhost/nprNews", { useNewUrlParser: true });
 
 // Routes
