@@ -7,7 +7,7 @@ var mongoose = require("mongoose");
 // Require all models
 var db = require("./models");
 
-// var PORT = 3000;
+var PORT = 3000;
 
 // Initialize Express
 var app = express();
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprNews",;
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprNews";
 
 mongoose.connect(MONGODB_URI,);
 // mongoose.connect("mongodb://localhost/nprNews", { useNewUrlParser: true });
